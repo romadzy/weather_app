@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/services/redux/store/store";
 
-import { Grid } from "@mui/material";
+import { Grid, Typography, Box } from "@mui/material";
 import CityCard from "@/components/CityCard";
 
 const CitiesList = () => {
@@ -13,9 +13,18 @@ const CitiesList = () => {
 
   return (
     <Grid container spacing={2}>
-      {cities.map(city => (
+      {cities.length > 0 ? cities.map(city => (
         <CityCard key={city} city={city} unit={unit} />
-      ))}
+      )) : (
+        <Typography
+          variant="h1"
+          color="primary"
+          align="center"
+          width="100%"
+        >
+          No cities added
+        </Typography>
+      )}
     </Grid>
   );
 }
