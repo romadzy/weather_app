@@ -80,11 +80,10 @@ const CityCard = ({ city, unit }: { city: string, unit: "metric" | "imperial" })
             >
               <Typography variant="h5">{data.name}</Typography>
               <Image
-                src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+                src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`}
                 alt={data.weather[0].description}
                 width={50}
                 height={50}
-                unoptimized
               />
             </Stack>
             <IconButton color="primary" onClick={handleRemove}>

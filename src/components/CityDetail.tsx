@@ -84,12 +84,11 @@ const CityDetail = () => {
             <Stack direction="row" alignItems="center" spacing={2}>
               <Typography variant="h4">{weather.name}</Typography>
               <Image
-                src={`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
+                src={`https://openweathermap.org/img/w/${weather.weather[0].icon}.png`}
                 alt={weather.weather[0].description}
                 width={64}
                 height={64}
                 priority
-                unoptimized
               />
             </Stack>
             <WeatherInfo data={weather} unit={unit} type="detail"/>
