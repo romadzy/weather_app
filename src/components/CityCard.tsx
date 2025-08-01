@@ -21,13 +21,14 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import Loader from "./UI/Loader";
 import WeatherInfo from "./WeatherInfo";
+import RefetchButton from "./UI/RefetchButton";
 
 
 const CityCard = ({ city, unit }: { city: string, unit: "metric" | "imperial" }) => {
   const dispatch = useDispatch();
   const initialized = useSelector((state: RootState) => state.weather.initialized);
   
-  const { data, error, isLoading } = useGetCityWeatherQuery({ city, unit }, {
+  const { data, error, isLoading, refetch } = useGetCityWeatherQuery({ city, unit }, {
     skip: !initialized,
   });
 
@@ -86,9 +87,12 @@ const CityCard = ({ city, unit }: { city: string, unit: "metric" | "imperial" })
                 height={50}
               />
             </Stack>
-            <IconButton color="primary" onClick={handleRemove}>
-              <DeleteIcon />
-            </IconButton>
+            <Stack direction="row">
+              <RefetchButton refetch={refetch} />
+              <IconButton color="primary" onClick={handleRemove}>
+                <DeleteIcon />
+              </IconButton>
+            </Stack>
           </Stack>
           <WeatherInfo data={data} unit={unit} type="card"/>
 

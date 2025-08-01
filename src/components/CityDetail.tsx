@@ -15,9 +15,7 @@ import {
   Stack,
   Card,
   Alert,
-  IconButton,
 } from "@mui/material";
-import RefreshIcon from '@mui/icons-material/Refresh';
 import {
   LineChart,
   Line,
@@ -33,6 +31,7 @@ import Link from "next/link";
 
 import WeatherInfo from "./WeatherInfo";
 import Loader from "./UI/Loader";
+import RefetchButton from "./UI/RefetchButton";
 
 const CityDetail = () => {
   const params = useParams();
@@ -68,6 +67,11 @@ const CityDetail = () => {
       temp: item.main.temp,
     })) || [];
 
+  const refetch = () => {
+    refetchWeather();
+    refetchHourly();
+  };
+
   if (isLoading) return <Loader />;
   if (error) return <Alert severity="error">Error loading data</Alert>;
   if (!weather) return <Alert severity="warning">Do not have weather data</Alert>;
@@ -99,16 +103,7 @@ const CityDetail = () => {
             </Stack>
             <WeatherInfo data={weather} unit={unit} type="detail"/>
           </Box>
-          <IconButton
-            color="primary"
-            onClick={() => {
-              refetchWeather();
-              refetchHourly();
-            }}
-            sx={{ ml: "auto" }}
-          >
-            <RefreshIcon />
-          </IconButton>
+          <RefetchButton refetch={refetch} />
         </Stack>
       </Card>
       <Card sx={{ p: 3, m: 0 }}>
