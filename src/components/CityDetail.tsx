@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/services/redux/store/store";
 import {
@@ -37,7 +38,12 @@ const CityDetail = () => {
   const params = useParams();
   const router = useRouter();
   const city = params.id as string;
+  const cities = useSelector((state: RootState) => state.weather.cities);
   const unit = useSelector((state: RootState) => state.weather.unit);
+
+  if (!cities.includes(city)) {
+    notFound();
+  }
 
   const {
     data: weather,
